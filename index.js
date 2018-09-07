@@ -12,11 +12,10 @@ let browser, page;
 
 const runBrowser = async () => {
     browser = await puppeteer.launch();
-    page = await browser.newPage();
-    page.on('error', (err) => {
-        console.log(err);
-    })
-    page.setDefaultNavigationTimeout(10000);
+    // page.on('error', (err) => {
+    //     console.log(err);
+    // })
+    // page.setDefaultNavigationTimeout(10000);
 };
 
 app.use((req, res, next) => {
@@ -31,16 +30,22 @@ app.listen(port, async () => {
 });
 
 app.get('/', async (req, res) => {
+    page = await browser.newPage();
+
     const data = await scrapRepos(page, req.query);
     res.json(data);
 });
 
 app.get('/devs', async (req, res) => {
+    page = await browser.newPage();
+
     const data = await scrapDevs(page, req.query);
     res.json(data);
 });
 
 app.get('/repo/:name', async (req, res) => {
+    page = await browser.newPage();
+
     const link = req.params.name;
     const data = await scrapReadme(page, link);
     res.json(data);

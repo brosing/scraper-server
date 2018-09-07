@@ -48,6 +48,7 @@ const scrapRepos = async (page, query) => {
     return repos;
   }, SELECTOR);
 
+  // page.close();
   return result;
 }
 

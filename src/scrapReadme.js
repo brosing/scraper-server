@@ -14,6 +14,7 @@ const scrapReadme = async (page, link) => {
     return html.split(`src="/`).join(`src="https://github.com/`);
   }, readmeSelector);
 
+  // page.close();
   return result;
 }
 
