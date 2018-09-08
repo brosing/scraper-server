@@ -37,7 +37,6 @@ const scrapDevs = async (page, query) => {
       });
     })
 
-    // page.close();
     return devs;
   }, SELECTOR);
 
