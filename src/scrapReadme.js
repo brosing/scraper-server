@@ -1,5 +1,5 @@
 const baseURL = 'https://github.com/';
-const postfixURL = '/blob/master/README.md';
+const postfixURL = '/blob/master/readme.md';
 const readmeSelector = '.readme.blob';
 
 const scrapReadme = async (page, link) => {
