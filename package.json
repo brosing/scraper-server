@@ -9,5 +9,11 @@
     "mongoose": "^5.2.5",
     "puppeteer": "^1.6.1",
     "ramda": "^0.25.0"
+  },
+  "engines": {
+    "node": "8.11.3"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
