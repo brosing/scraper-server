@@ -21,7 +21,7 @@ let browser;
         console.log('we are on: ', port);
     })
 
-    browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']})
+    browser = await puppeteer.launch()
 
     app.get('/', async (req, res) => {
         const pageRepos = await browser.newPage();
