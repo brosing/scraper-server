@@ -10,17 +10,17 @@ const port = process.env.PORT || 8000;
 
 let browser;
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+app.listen(port, function() {
+    console.log('we are on: ', port);
+});
+
 (async () => {
-    app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    })
-
-    app.listen(port, async () => {
-        console.log('we are on: ', port);
-    })
-
     browser = await puppeteer.launch({ args: ['--no-sandbox'] })
 
     app.get('/', async (req, res) => {
