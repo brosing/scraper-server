@@ -1,6 +1,6 @@
 const SELECTOR = '.repo-list > li';
 
-const scrapRepos = async (page, query) => {
+const scrapRepos = async function(page, query) {
   let url = 'https://github.com/trending';
 
   if (query.since && query.since === 'weekly') {
@@ -17,11 +17,11 @@ const scrapRepos = async (page, query) => {
     return error.message;
   }
 
-  const result = await page.evaluate((el) => {
+  const result = await page.evaluate(function(el) {
     const collections = document.querySelectorAll(el);
     let repos = [];
 
-    collections.forEach((item) => {
+    collections.forEach(function(item) {
       const title = item.querySelector('h3 > a').innerText;
       const link = item.querySelector('h3 > a').getAttribute('href');
       const description = item.querySelector('.py-1 > p').innerText;

@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 
 const scrapRepos = require('./src/scrapRepos');
 const scrapDevs = require('./src/scrapDevs');
-const scrapReadme = require('./src/scrapReadme');
+// const scrapReadme = require('./src/scrapReadme');
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -39,12 +39,12 @@ app.listen(port, function() {
         pageDevs.close();
     })
 
-    app.get('/repo/:name', async (req, res) => {
-        const link = req.params.name;
-        const pageReadme = await browser.newPage();
-        const data = await scrapReadme(pageReadme, link);
+    // app.get('/repo/:name', async (req, res) => {
+    //     const link = req.params.name;
+    //     const pageReadme = await browser.newPage();
+    //     const data = await scrapReadme(pageReadme, link);
 
-        res.json(data);
-        pageReadme.close();
-    })
+    //     res.json(data);
+    //     pageReadme.close();
+    // })
 })();

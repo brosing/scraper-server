@@ -1,6 +1,6 @@
 const SELECTOR = '.explore-content > ol > li';
 
-const scrapDevs = async (page, query) => {
+const scrapDevs = async function (page, query) {
   let url = 'https://github.com/trending/developers';
 
   if (query.since && query.since === 'weekly') {
@@ -17,22 +17,28 @@ const scrapDevs = async (page, query) => {
     return error.message;
   }
   
-  const result = await page.evaluate((el) => {
+  const result = await page.evaluate(function(el) {
     const collections = document.querySelectorAll(el);
     let devs = [];
 
-    collections.forEach((item) => {
+    collections.forEach(function(item) {
       const link = item.querySelector('.f3.text-normal > a').getAttribute('href');
       const title = item.querySelector('.f3.text-normal > a').innerText;
-      const snipitName = item.querySelector('.repo-snipit .repo-snipit-name').innerText;
-      const snipitDesc = item.querySelector('.repo-snipit .repo-snipit-description').innerText;
-      const avatar = item.querySelector('.d-flex > .mx-2 > a > img').src;
+
+      const anyItemName = item.querySelector('.repo-snipit .repo-snipit-name');
+      const itemName = anyItemName ? anyItemName.innerText : null;
+
+      const anyItemDesc = item.querySelector('.repo-snipit .repo-snipit-description');
+      const itemDesc = anyItemDesc ? anyItemDesc.innerText : null;
+
+      const anyAvatar = item.querySelector('.d-flex > .mx-2 > a > img');
+      const avatar = anyAvatar ? anyAvatar.src : null;
 
       devs.push({
         link,
         title,
-        snipitName,
-        snipitDesc,
+        itemName,
+        itemDesc,
         avatar,
       });
     })
